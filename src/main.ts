@@ -1,21 +1,21 @@
 /*
 depo action source package
 */
-import { printSearchResults } from "./actions/search.ts";
+import { printSearchResults, initRepo } from "./actions/actions.ts"; 
 import { sources } from "./sources/sources.ts";
+import { flags as depoFlags } from "./packages/flags/flags.ts";
+import {args as depoArgs } from "./packages/args/args.ts";
 
 const action = Deno.args[0];
 const source = Deno.args[1];
 const args = Deno.args.slice(2);
 
-//import { parse } from "https://deno.land/std/flags/mod.ts";
+import { parse } from "https://deno.land/std/flags/mod.ts";
 
-// const flags = parse(Deno.args, {
-//   //boolean: ["help", "color"],
-//   string: ["as"],
-//   //default: { color: true },
-//   //negatable: ["color"],
-// });
+ const flags = parse(Deno.args, {
+   boolean: Object.keys(depoFlags).concat(["y", "yes"]),
+   string: Object.keys(depoArgs),
+ });
 
 switch (action) { 
     case "search": {
@@ -33,13 +33,13 @@ switch (action) {
         
     }
     case "init" : {
-        const shouldProceed = confirm("init repo with depo? (y/n)");
-        if (shouldProceed){
-            // init repo
-            console.log("init repo");
-        }else{
-            console.log("cancelled");
+        
+        // check if autoapproved
+        if (flags.y || flags.yes){
+            initRepo(source, true);
+        } else {
+            initRepo(source, false);
         }
-        break;
+        
     }
 }

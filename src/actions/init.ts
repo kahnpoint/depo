@@ -16,13 +16,19 @@ export async function initRepo(repoName: string|null = null, approveAll: boolean
             Deno.chdir(repoName);
         }
     } catch (e) {
-        return Error("folder already exists");
+        console.log(`%cFolder "${repoName}" already exists`, `color: red`);
     }
     
     // create src folder
-    Deno.mkdirSync('src');
+    try{
+        Deno.mkdirSync("src", {});
+    } catch (e) {
+        console.log(`%cFolder "src" already exists`, `color: red`);
+        null
+    }
     
     // create deno.json
+    try{
     const DENO_JSON = {
         "tasks": {
             "main": "deno run src/main.ts",
@@ -34,6 +40,10 @@ export async function initRepo(repoName: string|null = null, approveAll: boolean
         
     }
     Deno.writeTextFileSync('deno.json', JSON.stringify(DENO_JSON, null, 4), {createNew: true});
+    } catch (e) {
+        console.log(`%cdeno.json already exists`, `color: red`); 
+    }
+    
     
     // create main.ts
     const MAIN_TS = `export function add(a: number, b: number): number {
