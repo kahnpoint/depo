@@ -1,7 +1,7 @@
 import { sources } from "../sources/sources.ts";
 import { parse as htmlParse} from 'https://esm.sh/node-html-parser';
 import moment from "https://esm.sh/moment";
-import { cacheHtml } from "../../utils/utils.ts";
+import { cacheHtml } from "../utils/utils.ts";
 
 //const response = await fetch(sources[source].searchUrl + library);
 

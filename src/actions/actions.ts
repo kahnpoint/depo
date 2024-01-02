@@ -1,6 +1,8 @@
 import {Action} from './Action.ts'
 /*
 actions
+    init 
+        depo init
     help (h)
         depo h 
     version (v)
@@ -26,11 +28,12 @@ actions
 
 export const actions: Record<string, Action> = {
     //"help": new Action('help', 'h', 'display help'),
+    "init": new Action('init', null, 'initialize repo with depo'),
     "version": new Action('version', 'v', 'display version'),
     "install": new Action('install', 'i', 'install a package'),
     "remove": new Action('remove', 'r', 'remove a package'),
     "update": new Action('update', 'u', 'update a package'),
-    //"search": new Action('search', 's', 'search for a package'),
+    "search": new Action('search', 's', 'search for a package'),
     //"settings": new Action('settings', null, 'manage settings'),
     //"tokens": new Action('tokens', null, 'manage tokens'),
     "upgrade": new Action('upgrade', null, 'upgrade depo')
