@@ -1,9 +1,11 @@
 {
   "tasks": {
-    "de": "NODE_ENV='development' deno run -A src/main.ts",
-    "dev": "deno cache src/main.ts && NODE_ENV='development' deno run -A --watch src/main.ts"
+    "main": "NODE_ENV='development' deno run -A src/main.ts",
+    "dev": "deno cache src/main.ts && NODE_ENV='development' deno run -A --watch src/main.ts",
+    "build": "deno compile --output ./depo src/main.ts"
   },
   "imports": {
+    "cliffy-command": "https://deno.land/x/cliffy@v1.0.0-rc.3/command/mod.ts",
     "moment": "https://esm.sh/v135/moment",
     "node-html-parser": "https://esm.sh/v135/node-html-parser",
     "assert": "https://deno.land/std@0.210.0/assert/mod.ts",

@@ -1,10 +1,5 @@
-import {Action, actions} from './Action.ts'
-import { initRepo } from "./init.ts"
-import { printSearchResults } from "./search.ts";
+import { initCommand } from "./init.ts";
+import { searchCommand } from "./search.ts";
+import { installCommand } from "./install.ts";
 
-export {
-    Action,
-    actions,
-    initRepo,
-    printSearchResults,
-}
+export { initCommand, installCommand, searchCommand };
