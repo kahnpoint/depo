@@ -8,7 +8,6 @@
     "cliffy-command": "https://deno.land/x/cliffy@v1.0.0-rc.3/command/mod.ts",
     "moment": "https://esm.sh/v135/moment",
     "node-html-parser": "https://esm.sh/v135/node-html-parser",
-    "assert": "https://deno.land/std@0.210.0/assert/mod.ts",
     "deps": "./src/deps.ts",
     "log": "https://deno.land/std@0.210.0/log/mod.ts"
   }

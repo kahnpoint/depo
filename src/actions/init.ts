@@ -1,17 +1,8 @@
 import { run } from "../utils/utils.ts";
 import { DEPO_JSON } from "../depo.json.ts";
-import { Command } from "cliffy-command";
 import { DENO_JSON } from "../deno.json.ts";
 
-export const initCommand = new Command()
-  .description("Initialize repo with depo.")
-  .arguments("[name:string]")
-  .option("-y, --yes", "Approve all prompts")
-  .action(async (options, name, ...args) => {
-    await initRepo(name, options.yes);
-  });
-
-async function initRepo(
+export async function initRepo(
   repoName: string | null = null,
   approveAll: boolean | undefined = false,
 ) {
@@ -20,10 +11,10 @@ async function initRepo(
 
   // intro header
   console.log(
-    `%c🦕 Deno %c${Deno.version.deno} %c🚚 Depo %c${DEPO_JSON.depo.version}`,
-    "color: green; font-weight: bold",
-    "color: white",
+    `%c🚚 Depo %c${DEPO_JSON.depo.version} %c🦕 Deno %c${Deno.version.deno}`,
     "color: blue; font-weight: bold",
+    "color: white",
+    "color: green; font-weight: bold",
     "color: white",
   );
 

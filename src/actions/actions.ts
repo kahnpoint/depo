@@ -1,5 +1,5 @@
-import { initCommand } from "./init.ts";
-import { searchCommand } from "./search.ts";
-import { installCommand } from "./install.ts";
+import { initCommand } from "./initCommand.ts";
+import { searchCommand } from "./searchCommand.ts";
+import { installCommand } from "./installCommand.ts";
 
 export { initCommand, installCommand, searchCommand };

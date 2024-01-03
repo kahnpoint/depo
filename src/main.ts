@@ -1,33 +1,26 @@
 import { Command } from "cliffy-command";
-// environment variables
 import { DEPO_JSON } from "./depo.json.ts";
+import { initCommand, searchCommand, installCommand } from "./actions/actions.ts";
 
-import { initCommand, searchCommand } from "./actions/actions.ts";
-
-const foo = new Command()
-  .option("-f, --foo", "Foo option.")
-  .arguments("<value:string>")
-  .action((options, ...args) => {
-    console.log("Foo command called.", options, args);
-  });
-
+// Main command entrypoint
 await new Command()
-  // Main command.
   .name("depo")
-  .version("0.1.0")
+  .version(DEPO_JSON.depo.version)
   .description("Command line framework for Deno")
   .globalOption("-d, --debug", "Enable debug output.")
   .action((options, ...args) => {
-    console.log("Main command called.");
+    console.log(
+      `%c🚚 Depo %c${DEPO_JSON.depo.version} %c🦕 Deno %c${Deno.version.deno}`,
+      "color: blue; font-weight: bold",
+      "color: white",
+      "color: green; font-weight: bold",
+      "color: white",
+    );
   })
-  // Child command 1.
+  // setup
   .command("init", initCommand)
+  // package management
+  .command("install", installCommand)
+  // miscellaneous
   .command("search", searchCommand)
-  // Child command 2.
-  .command("bar", "Bar sub-command.")
-  .option("-b, --bar", "Bar option.")
-  .arguments("<input:string> [output:string]")
-  .action((options, input, output, ...args) => {
-    console.log("Bar command called.", options, input, output, args);
-  })
   .parse(Deno.args);
