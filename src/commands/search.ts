@@ -1,9 +1,7 @@
 import { parse as htmlParse } from "node-html-parser";
 import moment from "moment";
 import { cacheHtml } from "../utils/utils.ts";
-import {
-  dealiasSource,
-} from "../sources/sources.ts";
+import { dealiasSource, DEFAULT_SOURCE } from "../sources/sources.ts";
 
 const tab = "  ";
 
@@ -24,7 +22,7 @@ async function parseDenoSearch(html: string) {
   return contents;
 }
 
-async function parseNodeSearch(html: string, library: string, count = 3) {
+async function parseNodeSearch(html: string, module: string, count = 3) {
   function getNodeInfo(html: string) {
     const root = htmlParse(html);
     const h3Elements = root.querySelectorAll("h3");
@@ -105,7 +103,7 @@ function parseGithubSearch(html: string) {
         followers: 58169,
         has_funding_file: false,
         hl_name: "lodash/<em>lodash</em>",
-        hl_trunc_description: "A modern JavaScript utility library delivering modularity, performance, &amp; extras.",
+        hl_trunc_description: "A modern JavaScript utility module delivering modularity, performance, &amp; extras.",
         language: "JavaScript",
         mirror: false,
         owned_by_organization: true,
@@ -144,7 +142,7 @@ function printDenoSearchResult(data: any, tabCount = 1) {
   /*
    {
   title: "lodash",
-  description: "A modern JavaScript utility library delivering modularity, performance, & extras."
+  description: "A modern JavaScript utility module delivering modularity, performance, & extras."
 }
   */
 
@@ -200,7 +198,7 @@ function printGithubSearchResult(data: any, tabCount = 1) {
   /*
       title: "lodash/lodash",
         updatedAt: "3 days ago",
-        description: "A modern JavaScript utility library delivering modularity, performance, &amp; extras.",
+        description: "A modern JavaScript utility module delivering modularity, performance, &amp; extras.",
         stars: 58169,
         language: "JavaScript"
     */
@@ -223,16 +221,16 @@ ${tabs1}⭐ ${data.stars} - 🔣 %c${data.language} - ⌚ ${data.updatedAt}`;
 }
 
 export async function printSearchResults(
-  source: string,
-  library: string,
+  source: string | undefined,
+  module: string,
   count = 3,
 ) {
-  source = dealiasSource(source);
+  source = dealiasSource(source || DEFAULT_SOURCE);
 
   switch (source) {
     case "deno": {
       const searchUrl = "https://deno.land/x?query=";
-      const searchResults = await cacheHtml(searchUrl + library);
+      const searchResults = await cacheHtml(searchUrl + module);
       const denoSearchResults = await parseDenoSearch(searchResults);
       denoSearchResults.slice(0, count).forEach((result) => {
         console.log(...printDenoSearchResult(result));
@@ -241,10 +239,10 @@ export async function printSearchResults(
     }
     case "node": {
       const searchUrl = "https://www.npmjs.com/search?q=";
-      const searchResults = await cacheHtml(searchUrl + library);
+      const searchResults = await cacheHtml(searchUrl + module);
       const nodeSearchResults = await parseNodeSearch(
         searchResults,
-        library,
+        module,
         count,
       );
       nodeSearchResults.slice(0, count).forEach((result) => {
@@ -254,7 +252,7 @@ export async function printSearchResults(
     }
     case "github": {
       const searchUrl = "https://github.com/search?type=repositories&q=";
-      const searchResults = await cacheHtml(searchUrl + library);
+      const searchResults = await cacheHtml(searchUrl + module);
       const githubSearchResults = await parseGithubSearch(searchResults);
       githubSearchResults.slice(0, count).forEach((result: any) => {
         console.log(...printGithubSearchResult(result));

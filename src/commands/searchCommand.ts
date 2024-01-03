@@ -1,26 +1,36 @@
 import { Command } from "cliffy-command";
-import { sourceEnum, sourceListBase, dealiasSource } from "../sources/sources.ts";
+import {
+  dealiasSource,
+  DEFAULT_SOURCE,
+  isSource,
+  sourceEnum,
+  sourceListBase,
+} from "../sources/sources.ts";
 import { printSearchResults } from "./search.ts";
 
 export const searchCommand = new Command()
   .alias("s")
   .type("source", sourceEnum)
-  .description("Search Deno.land, NPM, or Github for libraries.")
+  .description("Search Deno.land, NPM, or Github.")
   .arguments("[source:string:source] [library:string] [count:integer]")
-  .action(async (options, source: string | undefined, library, count) => {
-    source = dealiasSource(source);
-    
-    if (sourceListBase.includes(source)) {
+  .action(async (options, ...args) => { // source: string | undefined, library, count
+    if (args.length === 0) {
+      // no arguments provided
+      console.log("Required : %c[library]", "color: yellow");
+      return;
+    }
+
+    let source;
+    if (isSource(args[0])) {
       // source is a source
-      if (library === undefined) {
-        console.log("Required : %c[library]", "color: yellow");
-        return;
-      }
+      source = args.shift();
     } else {
       // source is a package
-      library = source;
       source = undefined;
     }
+    source = dealiasSource(source as string);
+    const library = args.shift() as string;
+    const count = args.shift() as number;
 
     //console.log("search command called", options, library, source, count)
     if (source === undefined) {

@@ -1,6 +1,18 @@
 import { run } from "../utils/utils.ts";
-import { DEPO_JSON } from "../depo.json.ts";
-import { DENO_JSON } from "../deno.json.ts";
+import { DEPO_JSON } from "../meta/depo.json.ts";
+import { DENO_JSON } from "../meta/deno.json.ts";
+
+export function printIntroHeader() {
+  console.log(
+    `%c🚚 Depo %c${DEPO_JSON.depo.version} - %c☁️  ESM %c${DEPO_JSON.esm.version} - %c🦕 Deno %cv${Deno.version.deno}`,
+    "color: blue; font-weight: bold",
+    "color: white",
+    "color: orange; font-weight: bold",
+    "color: white",
+    "color: green; font-weight: bold",
+    "color: white",
+  );
+}
 
 export async function initRepo(
   repoName: string | null = null,
@@ -9,14 +21,7 @@ export async function initRepo(
   // set default values
   approveAll = approveAll ?? false;
 
-  // intro header
-  console.log(
-    `%c🚚 Depo %c${DEPO_JSON.depo.version} %c🦕 Deno %c${Deno.version.deno}`,
-    "color: blue; font-weight: bold",
-    "color: white",
-    "color: green; font-weight: bold",
-    "color: white",
-  );
+  printIntroHeader();
 
   // create new repo if a name is provided
   try {
@@ -72,7 +77,7 @@ import { add } from "./main.ts";
 Deno.test(function addTest() {
     assertEquals(add(2, 3), 5);
 });`;
-  
+
   try {
     Deno.writeTextFileSync("src/main_test.ts", MAIN_TEST_TS, {
       createNew: true,
@@ -88,7 +93,7 @@ Deno.test(function addTest() {
     });
   } catch (e) {
     console.log(`%cdepo.json already exists`, `color: orange`);
-  }  
+  }
 
   // optionally initialize git repo
   if (approveAll || confirm("Initialize Git repo?")) {
@@ -105,7 +110,7 @@ Deno.test(function addTest() {
 
   // optionally create vs code folder
   if (approveAll || confirm("Create .vscode folder?")) {
-    try{
+    try {
       Deno.mkdirSync(".vscode");
       const VSCODE_SETTINGS = {
         "deno.enable": true,
@@ -119,8 +124,8 @@ Deno.test(function addTest() {
       );
 
       console.log("✅ .vscode folder created");
-      } catch (e) {
-        console.log(`%c.vscode folder already exists`, `color: orange`);
-      }
+    } catch (e) {
+      console.log(`%c.vscode folder already exists`, `color: orange`);
+    }
   }
 }

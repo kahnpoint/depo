@@ -1,6 +1,7 @@
 import { Command } from "cliffy-command";
-import { DEPO_JSON } from "./depo.json.ts";
-import { initCommand, searchCommand, installCommand } from "./actions/actions.ts";
+import { DEPO_JSON } from "./meta/depo.json.ts";
+import * as commands from "./commands/commands.ts";
+import { printIntroHeader } from "./commands/init.ts";
 
 // Main command entrypoint
 await new Command()
@@ -9,18 +10,16 @@ await new Command()
   .description("Command line framework for Deno")
   .globalOption("-d, --debug", "Enable debug output.")
   .action((options, ...args) => {
-    console.log(
-      `%c🚚 Depo %c${DEPO_JSON.depo.version} %c🦕 Deno %c${Deno.version.deno}`,
-      "color: blue; font-weight: bold",
-      "color: white",
-      "color: green; font-weight: bold",
-      "color: white",
-    );
+    printIntroHeader();
+    console.log("Welcome to Depo! Type 'depo -h' for help.");
   })
   // setup
-  .command("init", initCommand)
+  .command("init", commands.initCommand)
   // package management
-  .command("install", installCommand)
+  .command("install", commands.installCommand)
+  .command("update", commands.updateCommand)
+  .command("remove", commands.removeCommand)
   // miscellaneous
-  .command("search", searchCommand)
+  .command("cache", commands.cacheCommand)
+  .command("search", commands.searchCommand)
   .parse(Deno.args);

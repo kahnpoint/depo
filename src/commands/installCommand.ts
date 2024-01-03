@@ -1,10 +1,17 @@
 import { Command } from "cliffy-command";
-import { sourceEnum } from "../sources/sources.ts";
+import {
+  dealiasSource,
+  DEFAULT_SOURCE,
+  isSource,
+  sourceEnum,
+} from "../sources/sources.ts";
+import { install } from "./install.ts";
+import { isDenoStd } from "../meta/deno.std.ts";
 
 export const installCommand = new Command()
   .alias("i")
   .type("source", sourceEnum)
-  .description("Install a module from a source.")
+  .description("Install module(s) from a source.")
   .arguments("[source:string:source] [modules...:string]")
   .group("arguments")
   /*
@@ -127,7 +134,66 @@ export const installCommand = new Command()
         "https://esm.sh/lodash/unescape?no-dts"
     */
   .option("--no-dts", "Ignore the types from the X-TypeScript-Types header")
-  .action(async (options, source, module) => {
-    //await initRepo(name, options.yes);
-    console.log(options, source, module);
+  .action(async (options, ...args) => {
+    // esm.sh and cliffy handle negated flags differently
+    function fixNegatedFlags(
+      options: Record<string, any>,
+      flagsToFix = ["bundle", "dts"],
+    ) {
+      for (const flag of flagsToFix) {
+        if (options[flag] == false) {
+          options[`no-${flag}`] = true;
+        }
+        delete options[flag];
+      }
+      return options;
+    }
+    let optionsFixed = fixNegatedFlags(options);
+
+    // esm.sh expects comma separated lists
+    const listArgs = ["alias", "deps", "exports", "external", "conditions"];
+    function fixListArgs(options: Record<string, any>, listArgs: string[]) {
+      for (const arg of listArgs) {
+        if (options[arg]) {
+          options[arg] = options[arg].join(",");
+        }
+      }
+      return options;
+    }
+    optionsFixed = fixListArgs(optionsFixed, listArgs);
+
+    // check for empty args
+    if (args.length == 0) {
+      console.log("Required: %c[modules]", "color: yellow");
+      return;
+    }
+
+    let source;
+    if (isSource(args[0])) {
+      // source is a source
+      if (args.length == 1) {
+        console.log("Required: %c[modules]", "color: yellow");
+        return;
+      }
+      source = args.shift();
+    } else {
+      // source is a package
+      source = DEFAULT_SOURCE;
+    }
+    source = dealiasSource(source);
+
+    // check for empty args
+    if (args.length == 0) {
+      console.log("Required: %c[modules]", "color: yellow");
+      return;
+    }
+
+    for (const module of args) {
+      if (isDenoStd(module || "")) {
+        console.log(`⬇️  deno:${module}`);
+      } else {
+        console.log(`⬇️  ${source}:${module}`);
+      }
+      await install(source || DEFAULT_SOURCE, module!, optionsFixed);
+    }
   });

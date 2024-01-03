@@ -9,6 +9,6 @@
     "moment": "https://esm.sh/v135/moment",
     "node-html-parser": "https://esm.sh/v135/node-html-parser",
     "deps": "./src/deps.ts",
-    "log": "https://deno.land/std@0.210.0/log/mod.ts"
+    "react": "https://esm.sh/v135/react@18.2.0"
   }
 }

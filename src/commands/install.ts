@@ -1,47 +1,9 @@
-import { DEPO_JSON } from "../depo.json.ts";
+import { DEPO_JSON } from "../meta/depo.json.ts";
 import { run } from "../utils/utils.ts";
-import { Command } from "cliffy-command";
-import { sourceEnum } from "../sources/sources.ts";
-import { DENO_JSON } from "../deno.json.ts";
+import { DENO_JSON } from "../meta/deno.json.ts";
+import { stableDenoStd, unstableDenoStd } from "../meta/deno.std.ts";
 
-const unstableDenoStd = new Set([
-  "archive",
-  "console",
-  "datetime",
-  "dotenv",
-  "encoding",
-  "flags",
-  "front_matter",
-  "html",
-  "http",
-  "log",
-  "msgpack",
-  "path",
-  "regexp",
-  "semver",
-  "streams",
-  "ulid",
-  "url",
-  "webgpu",
-]);
-
-const stableDenoStd = new Set([
-  "assert",
-  "async",
-  "bytes",
-  "collections",
-  "csv",
-  "fmt",
-  "fs",
-  "json",
-  "jsonc",
-  "media_types",
-  "testing",
-  "toml",
-  "uuid",
-  "yaml",
-]);
-
+// add the flags to the esm.sh url
 function buildQueryParameters(flags: Record<string, any>) {
   let query = "?";
   for (const key in flags) {
@@ -55,8 +17,26 @@ function buildQueryParameters(flags: Record<string, any>) {
   return query.slice(0, -1);
 }
 
-function install(source: string, pkg: string, flags: Record<string, any>) {
-  console.log("installing", source, pkg, flags);
+// get the redirect url to get the version
+async function getRedirectUrl(url: string): Promise<string> {
+  const response = await fetch(url, { redirect: "manual" });
+  if (response.status === 301 || response.status === 302) {
+    return response.headers.get("location") || "";
+  }
+  return url;
+}
+
+export async function install(
+  source: string,
+  pkg: string,
+  flags: Record<string, any> | string,
+) {
+  //console.log("installing", source, pkg, flags);
+  let stringFlags = "";
+  if (typeof flags === "string") {
+    stringFlags = flags;
+    flags = {};
+  }
 
   // use an alias if specified
   let aliasedPkg: string = flags.as ?? pkg;
@@ -64,10 +44,8 @@ function install(source: string, pkg: string, flags: Record<string, any>) {
   // only take before the @, ignoring an @ if it starts with it
   // like worst case scenario:
   // @babel/core@^5.0.0
-  if (aliasedPkg.startsWith("@")) {
-    aliasedPkg = aliasedPkg.slice(0, aliasedPkg.indexOf("@", 1)).slice(1);
-  } else if (aliasedPkg.includes("@")) {
-    aliasedPkg = aliasedPkg.slice(0, aliasedPkg.indexOf("@", 0));
+  if (aliasedPkg.slice(1).includes("@")) {
+    aliasedPkg = aliasedPkg.slice(0, aliasedPkg.slice(1).indexOf("@", 0) + 1);
   }
 
   // check if a standard module module is being installed
@@ -76,19 +54,19 @@ function install(source: string, pkg: string, flags: Record<string, any>) {
       `https://deno.land/std@${DEPO_JSON.std.version}/${aliasedPkg}/mod.ts` +
       buildQueryParameters(flags);
     Deno.writeTextFileSync("deno.json", JSON.stringify(DENO_JSON, null, 2));
-    
   } else {
     switch (source) {
       case "node": {
-        DENO_JSON["imports"][aliasedPkg] =
-          `https://esm.sh/${DEPO_JSON.esm.version}/${pkg}` +
-          buildQueryParameters(flags);
+        DENO_JSON["imports"][aliasedPkg] = await getRedirectUrl(
+              `https://esm.sh/${DEPO_JSON.esm.version}/${pkg}`,
+            ) +
+            buildQueryParameters(flags) || stringFlags || "";
         break;
       }
       case "github": {
         aliasedPkg = aliasedPkg.split("/")[1];
         DENO_JSON["imports"][aliasedPkg] = `https://esm.sh/gh/${pkg}` +
-          buildQueryParameters(flags);
+            buildQueryParameters(flags) || stringFlags || "";
         break;
       }
       default: { // deno
@@ -96,7 +74,7 @@ function install(source: string, pkg: string, flags: Record<string, any>) {
           aliasedPkg = aliasedPkg.slice(0, aliasedPkg.indexOf("/"));
         }
         DENO_JSON["imports"][aliasedPkg] = `https://deno.land/x/${pkg}` +
-          buildQueryParameters(flags);
+            buildQueryParameters(flags) || stringFlags || "";
         break;
       }
     }
