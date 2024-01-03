@@ -1,9 +1,13 @@
 import { Arg } from "./Arg.ts";
 /*
 args
-                        
+
+--as <string>
+    import a package as a different name
+    "preact/compat" --as "react"
+
 --alias <string>
-    use a different alias
+    manually alias a package
     "preact/compat" --alias "react"
     "https://esm.sh/swr?alias=react:preact/compat";
 
@@ -39,17 +43,6 @@ args
     "https://esm.sh/v135/react-dom";
     "https://esm.sh/react-dom?pin=v135";
 */
-
-// export const args: Record<string, Arg> = {
-//     "alias": new Arg("alias", null, "use a different alias", "depo i preact/compat --alias react"),
-//     "deps": new Arg("deps", null, "manually specify dependencies", "depo i swr --deps react@17.0.2"),
-//     "exports": new Arg("exports", null, "only install specific exports", "depo i tslib --exports __await,__rest"),
-//     "external": new Arg("external", null, "do not rewrite the import specifiers of the specified dependencies", "depo i preact-render-to-string --external preact,react"),
-//     "target": new Arg("target", null, "specify the target environment", "depo i react --target es2020"),
-//     "conditions": new Arg("conditions", null, "esbuild - controls how the exports field in package.json is interpreted", "depo i foo --conditions custom1,custom2"),
-//     "std": new Arg("std", "deno-std", "use a specific version of deno std", "depo i postcss --std 0.128.0"),
-//     "pin": new Arg("pin", null, "pin the version of a package", "depo i react-dom --pin v135 "),
-// }
 
 export const args: Record<string, Arg> = {
     "alias": new Arg({

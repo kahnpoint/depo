@@ -1,8 +1,11 @@
 export const DEPO_JSON = {
     "depo": {
-        "version": "0.0.1"
+        "version": await Deno.readTextFile('VERSION')
+    },
+    "std": {
+      "version": "0.210.0"  
     },
     "esm": {
-        "version": "v135"
+        "version": await Deno.readTextFile('VERSION_ESM')
     }
 }

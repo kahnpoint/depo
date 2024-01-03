@@ -1,9 +1,13 @@
 {
   "tasks": {
     "de": "NODE_ENV='development' deno run -A src/main.ts",
-    "dev": "NODE_ENV='development' deno run -A --watch "
+    "dev": "deno cache src/main.ts && NODE_ENV='development' deno run -A --watch src/main.ts"
   },
-  "imports" : {
-    
+  "imports": {
+    "moment": "https://esm.sh/v135/moment",
+    "node-html-parser": "https://esm.sh/v135/node-html-parser",
+    "assert": "https://deno.land/std@0.210.0/assert/mod.ts",
+    "deps": "./src/deps.ts",
+    "log": "https://deno.land/std@0.210.0/log/mod.ts"
   }
 }

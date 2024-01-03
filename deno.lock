@@ -3,13 +3,11 @@
   "redirects": {
     "https://deno.land/std/flags/mod.ts": "https://deno.land/std@0.210.0/flags/mod.ts",
     "https://esm.sh/moment": "https://esm.sh/moment@2.30.1",
-    "https://esm.sh/node-html-parser": "https://esm.sh/node-html-parser@6.1.12"
+    "https://esm.sh/node-html-parser": "https://esm.sh/node-html-parser@6.1.12",
+    "https://esm.sh/v135/moment": "https://esm.sh/v135/moment@2.30.1",
+    "https://esm.sh/v135/node-html-parser": "https://esm.sh/v135/node-html-parser@6.1.12"
   },
   "remote": {
-    "https://deno.land/std@0.207.0/assert/assert.ts": "9a97dad6d98c238938e7540736b826440ad8c1c1e54430ca4c4e623e585607ee",
-    "https://deno.land/std@0.207.0/assert/assertion_error.ts": "4d0bde9b374dfbcbe8ac23f54f567b77024fb67dbb1906a852d67fe050d42f56",
-    "https://deno.land/std@0.207.0/cli/parse_args.ts": "9bea02050b3f302e706871ff87ecfa3ad82cc34249adbe0dcddfaac75bdb48ff",
-    "https://deno.land/std@0.207.0/flags/mod.ts": "567a34800a33e701942cb1726dd7e627a76e4681c33ce7346ac85cf90f691a8e",
     "https://deno.land/std@0.210.0/assert/_constants.ts": "8a9da298c26750b28b326b297316cdde860bc237533b07e1337c021379e6b2a9",
     "https://deno.land/std@0.210.0/assert/_diff.ts": "2c9371f17cf08cbb843c924bc31ca77af422ec4fe162f73d42c651d547573fa8",
     "https://deno.land/std@0.210.0/assert/_format.ts": "335ce8e15c65b679ad142dbc9e5e97e5d58602c39dd3c9175cef6c85fe22d6d5",
@@ -41,9 +39,17 @@
     "https://deno.land/std@0.210.0/assert/mod.ts": "37c49a26aae2b254bbe25723434dc28cd7532e444cf0b481a97c045d110ec085",
     "https://deno.land/std@0.210.0/assert/unimplemented.ts": "4e3e504792c87c485dbc5f4020489d8806ef697741403af2008dfa7b5a4711e8",
     "https://deno.land/std@0.210.0/assert/unreachable.ts": "1af8c99421cc5fb7332454b2b9eca074a4e394895a180bc837750dedcca75338",
+    "https://deno.land/std@0.210.0/bytes/copy.ts": "939d89e302a9761dcf1d9c937c7711174ed74c59eef40a1e4569a05c9de88219",
     "https://deno.land/std@0.210.0/cli/parse_args.ts": "9bea02050b3f302e706871ff87ecfa3ad82cc34249adbe0dcddfaac75bdb48ff",
     "https://deno.land/std@0.210.0/flags/mod.ts": "567a34800a33e701942cb1726dd7e627a76e4681c33ce7346ac85cf90f691a8e",
     "https://deno.land/std@0.210.0/fmt/colors.ts": "2685c524bef9b16b3059a417daf6860c754eb755e19e812762ef5dff62f24481",
+    "https://deno.land/std@0.210.0/fs/exists.ts": "da38bab3cd416131a2075c1a532c69b0b634c2ce8d75222355aa6d3d15995199",
+    "https://deno.land/std@0.210.0/io/buf_writer.ts": "6af65d3e243f8bb4ddbc921542ef8797e3bc128bccc43257fe081d57262ad48c",
+    "https://deno.land/std@0.210.0/log/formatters.ts": "23da1a9d28c27fa9880e6b4b36f92726f1989a14c106eb35c23b4281e519395c",
+    "https://deno.land/std@0.210.0/log/handlers.ts": "682234d655d519d13df9037ab788fc54fcaf676417f4bc7dd37bdbdb99e236ea",
+    "https://deno.land/std@0.210.0/log/levels.ts": "11566b9982ca7dad854bb6e6d477041ac76da253743eaacc3f20bef410cc4e30",
+    "https://deno.land/std@0.210.0/log/logger.ts": "fe3e2c4eb187f0f61f2be15ee191e1cc55c0c45c41a26bf4b3274740242121a7",
+    "https://deno.land/std@0.210.0/log/mod.ts": "72ab0c2a237c8c867d197ae7fe348bfa0c61d7af2b25d986e2896e528f03f94f",
     "https://esm.sh/moment@2.30.1": "52018c8a05227e5ab87d8ee772250e4c8661e8c781c27170449854dbbb9d5b7f",
     "https://esm.sh/node-html-parser@6.1.12": "8182c8dd2d38c3364f0c5bb93a9b84504c508066d8d6ba836e9d4adec7cd4d2f",
     "https://esm.sh/v135/boolbase@1.0.0/denonext/boolbase.mjs": "4e3bd67e9b1c5c55094eae98345d0107c6a44ef57bd3d4b9579698fa44722280",
@@ -57,7 +63,9 @@
     "https://esm.sh/v135/entities@4.5.0/denonext/lib/decode.js": "7fea6d8bd725edbbf7ea05031d2ea1bbbc1166dc11e3345d541198dd2dc16f1e",
     "https://esm.sh/v135/entities@4.5.0/denonext/lib/escape.js": "7ebdc622bf3618bab25db40da4a49e2b9d03f044745f125f0bc3359f2d060def",
     "https://esm.sh/v135/he@1.2.0/denonext/he.mjs": "1ffb3a2e1892578e01267fda4b32f30dd0b4b3be7393fe239b0ea30cf1d654c7",
+    "https://esm.sh/v135/moment@2.30.1": "52018c8a05227e5ab87d8ee772250e4c8661e8c781c27170449854dbbb9d5b7f",
     "https://esm.sh/v135/moment@2.30.1/denonext/moment.mjs": "72ca3ed295a9ee29bd5d4e5b39c3c12a48373318ddc3394b853d93b6966d7b09",
+    "https://esm.sh/v135/node-html-parser@6.1.12": "8182c8dd2d38c3364f0c5bb93a9b84504c508066d8d6ba836e9d4adec7cd4d2f",
     "https://esm.sh/v135/node-html-parser@6.1.12/denonext/node-html-parser.mjs": "f66dab1439ddc197bffd9a804e394690cded07e9346f670eee63f7fbceebe049",
     "https://esm.sh/v135/nth-check@2.1.1/denonext/nth-check.mjs": "638b4f5a22236cd05c7d1d43e5c6ea719695c4a8bc7beccdf8d97a434bea96dc"
   }
