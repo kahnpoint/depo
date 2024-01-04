@@ -11,7 +11,7 @@ await new Command()
   .globalOption("-d, --debug", "Enable debug output.")
   .action((options, ...args) => {
     printIntroHeader();
-    console.log("Welcome to Depo! Type 'depo -h' for help.");
+    console.log("Welcome to Depo! Type 'depo -h' to list the commands.");
   })
   // setup
   .command("init", commands.initCommand)

@@ -1,3 +1,4 @@
+// the default deno.json file
 export const DEFAULT_DENO_JSON: Record<string, Record<string, any>> = {
   "tasks": {
     "main": "deno run src/main.ts",
@@ -11,6 +12,7 @@ export const DEFAULT_DENO_JSON: Record<string, Record<string, any>> = {
   "fmt": {},
 };
 
+// DENO_JSON is either the project's deno.json file or the default one
 export let DENO_JSON: typeof DEFAULT_DENO_JSON;
 try {
   DENO_JSON = JSON.parse(await Deno.readTextFile("deno.json"));

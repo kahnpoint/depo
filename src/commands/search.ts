@@ -1,12 +1,17 @@
+/*
+  search for a module on deno.land/x, npmjs.com, or github.com
+*/
 import { parse as htmlParse } from "node-html-parser";
 import moment from "moment";
 import { cacheHtml } from "../utils/utils.ts";
 import { dealiasSource, DEFAULT_SOURCE } from "../sources/sources.ts";
 
+// spaces for indentation
 const tab = "  ";
 
+// parse the html from deno.land/x
 async function parseDenoSearch(html: string) {
-  const result = htmlParse(html);
+  const result = await htmlParse(html);
   const ul = result.querySelector("ul.divide-y");
   const lis = ul!.querySelectorAll("li");
   const contents = lis.map((li) => {
@@ -15,6 +20,7 @@ async function parseDenoSearch(html: string) {
       "div.col-span-2.md\\:col-span-1.text-gray-600.text-sm",
     );
     return {
+      // deno doesn't have many of the fields that node and github have
       title: title ? title.text : null,
       description: description ? description.text : null,
     };
@@ -22,7 +28,8 @@ async function parseDenoSearch(html: string) {
   return contents;
 }
 
-async function parseNodeSearch(html: string, module: string, count = 3) {
+// parse the html from npmjs.com
+async function parseNodeSearch(html: string, count = 3) {
   function getNodeInfo(html: string) {
     const root = htmlParse(html);
     const h3Elements = root.querySelectorAll("h3");
@@ -91,6 +98,7 @@ async function parseNodeSearch(html: string, module: string, count = 3) {
   return results;
 }
 
+// parse the html from github.com
 function parseGithubSearch(html: string) {
   /*
     payload: {
@@ -138,6 +146,7 @@ function parseGithubSearch(html: string) {
   });
 }
 
+// print the results from deno.land/x
 function printDenoSearchResult(data: any, tabCount = 1) {
   /*
    {
@@ -162,6 +171,7 @@ ${tabs1}%c${data.description}`;
   return [output].concat(styles);
 }
 
+// print the results from npmjs.com
 function printNodeSearchResult(data: any, tabCount = 1) {
   /*
   {
@@ -194,6 +204,7 @@ ${tabs1}%c⬇️  ${data.weeklyDownloads}/wk - ⚖️  ${data.unpackedSize} - �
   return [output].concat(styles);
 }
 
+// print the results from github.com
 function printGithubSearchResult(data: any, tabCount = 1) {
   /*
       title: "lodash/lodash",
@@ -220,6 +231,7 @@ ${tabs1}⭐ ${data.stars} - 🔣 %c${data.language} - ⌚ ${data.updatedAt}`;
   return [output].concat(styles);
 }
 
+// print the results from a search query
 export async function printSearchResults(
   source: string | undefined,
   module: string,
@@ -242,8 +254,8 @@ export async function printSearchResults(
       const searchResults = await cacheHtml(searchUrl + module);
       const nodeSearchResults = await parseNodeSearch(
         searchResults,
-        module,
-        count,
+        count /* count is required to prevent getting the 
+                 weekly downloads for extra results */
       );
       nodeSearchResults.slice(0, count).forEach((result) => {
         console.log(...printNodeSearchResult(result));

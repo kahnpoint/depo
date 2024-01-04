@@ -1,0 +1,11 @@
+{
+  "depo": {
+    "version": "v0.0.1"
+  },
+  "std": {
+    "version": "0.210.0"
+  },
+  "esm": {
+    "version": "v135"
+  }
+}

@@ -2,6 +2,7 @@ import { run } from "../utils/utils.ts";
 import { DEPO_JSON } from "../meta/depo.json.ts";
 import { DENO_JSON } from "../meta/deno.json.ts";
 
+// print the depo, esm, and deno versions
 export function printIntroHeader() {
   console.log(
     `%c🚚 Depo %c${DEPO_JSON.depo.version} - %c☁️  ESM %c${DEPO_JSON.esm.version} - %c🦕 Deno %cv${Deno.version.deno}`,
@@ -21,6 +22,7 @@ export async function initRepo(
   // set default values
   approveAll = approveAll ?? false;
 
+  // print the depo, esm, and deno versions
   printIntroHeader();
 
   // create new repo if a name is provided

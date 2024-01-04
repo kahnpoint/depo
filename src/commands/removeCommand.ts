@@ -1,6 +1,7 @@
 import { Command } from "cliffy-command";
 import { remove } from "./remove.ts";
 
+// remove module(s) from deno.json
 export const removeCommand = new Command()
   .alias("r")
   .description("Remove (uninstall) module(s)")

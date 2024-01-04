@@ -188,6 +188,7 @@ export const installCommand = new Command()
       return;
     }
 
+    // install each module
     for (const module of args) {
       if (isDenoStd(module || "")) {
         console.log(`⬇️  deno:${module}`);

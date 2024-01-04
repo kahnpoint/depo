@@ -1,6 +1,7 @@
 import { Command } from "cliffy-command";
 import { update } from "./update.ts";
 
+// update module(s)
 export const updateCommand = new Command()
   .alias("u")
   .alias("up")

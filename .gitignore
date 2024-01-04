@@ -1,3 +1,5 @@
 depo
 .cache
-test
+/test
+_site
+docs/_site

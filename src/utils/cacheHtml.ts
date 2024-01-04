@@ -1,4 +1,4 @@
-//cache html locally for development
+//cache html locally for development (to prevent repeatedly calling the url)
 
 export async function cacheHtml(url: string): Promise<string> {
   if (Deno.env.get("NODE_ENV") === "development") {
