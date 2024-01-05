@@ -7,7 +7,7 @@ import { cacheHtml } from "../utils/utils.ts";
 import { dealiasSource, DEFAULT_SOURCE } from "../sources/sources.ts";
 
 // spaces for indentation
-const tab = "  ";
+   const tab = "  ";
 
 // parse the html from deno.land/x
 async function parseDenoSearch(html: string) {
@@ -254,7 +254,7 @@ export async function printSearchResults(
       const searchResults = await cacheHtml(searchUrl + module);
       const nodeSearchResults = await parseNodeSearch(
         searchResults,
-        count /* count is required to prevent getting the 
+        count, /* count is required to prevent getting the
                  weekly downloads for extra results */
       );
       nodeSearchResults.slice(0, count).forEach((result) => {

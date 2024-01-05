@@ -13,7 +13,6 @@ export const searchCommand = new Command()
   .description("Search Deno.land, NPM, or Github.")
   .arguments("[source:string:source] [library:string] [count:integer]")
   .action(async (options, ...args) => { // source: string | undefined, library, count
-    
     // check for no arguments
     if (args.length === 0) {
       console.log("Required : %c[library]", "color: yellow");
