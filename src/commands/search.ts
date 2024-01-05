@@ -7,7 +7,7 @@ import { cacheHtml } from "../utils/utils.ts";
 import { dealiasSource, DEFAULT_SOURCE } from "../sources/sources.ts";
 
 // spaces for indentation
-   const tab = "  ";
+const tab = "  ";
 
 // parse the html from deno.land/x
 async function parseDenoSearch(html: string) {
