@@ -51,7 +51,7 @@ export async function install(
   // check if a standard module module is being installed
   if (unstableDenoStd.has(aliasedPkg) || stableDenoStd.has(aliasedPkg)) {
     DENO_JSON["imports"][aliasedPkg] =
-      `https://deno.land/std@${DEPO_JSON.std.version}/${aliasedPkg}/mod.ts` +
+      `https://deno.land/std@${DEPO_JSON.deno.std.version}/${aliasedPkg}/mod.ts` +
       buildQueryParameters(flags);
     Deno.writeTextFileSync("deno.json", JSON.stringify(DENO_JSON, null, 2));
   } else {
@@ -103,5 +103,5 @@ export async function install(
   Deno.writeTextFileSync("src/deps.ts", DEPS_JSON.join("\n"));
   */
   // cache deps
-  run("deno", { args: ["cache", "src/deps.ts"] });
+  // run("deno", { args: ["cache", "src/deps.ts"] });
 }

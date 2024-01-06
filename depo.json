@@ -1,9 +1,19 @@
 {
-  "depo": {
-    "version": "v0.0.1"
+  "module": {
+    "name": "depo"
   },
-  "std": {
-    "version": "0.210.0"
+  "depo": {
+    "version": "0.0.0",
+    "cacheable": [
+      "src/mod.ts",
+      "src/deps.ts",
+      "src/deps_dev.ts"
+    ]
+  },
+  "deno": {
+    "std": {
+      "version": "0.210.0"
+    }
   },
   "esm": {
     "version": "v135"

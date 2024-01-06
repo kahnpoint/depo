@@ -93,11 +93,11 @@ export const installCommand = new Command()
     */
   .option("--no-bundle", "Don't bundle any dependencies")
   /*
-    --dev
+    -_dev
         use the dev version of the module
         "https://esm.sh/react?dev"
     */
-  .option("--dev", "Use the dev version of the module")
+  .option("-_dev", "Use the dev version of the module")
   /*
     --keep-names
         esbuild - keep original names, even in minified code

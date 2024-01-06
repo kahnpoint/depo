@@ -1,11 +1,14 @@
+import { DEPO_JSON } from "./depo.json.ts";
+
 // the default deno.json file
 export const DEFAULT_DENO_JSON: Record<string, Record<string, any>> = {
   "tasks": {
-    "main": "deno run src/main.ts",
-    "dev": "deno run --watch src/main.ts",
-    "build": `deno compile --output ./${Deno.cwd().split("/")[-1]} src/main.ts`,
+    "mod": "deno run src/mod.ts",
+    "dev": "deno run --watch src/mod.ts",
+    "build": `deno compile --output ${DEPO_JSON.module.name} src/mod.ts`,
   },
   "imports": {
+    "@/": "./src/",
     "deps": "./src/deps.ts",
   },
   "lint": {},

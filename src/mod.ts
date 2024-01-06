@@ -3,7 +3,7 @@ import { DEPO_JSON } from "./meta/depo.json.ts";
 import * as commands from "./commands/commands.ts";
 import { printIntroHeader } from "./commands/init.ts";
 
-// Main command entrypoint
+// mod command entrypoint
 await new Command()
   .name("depo")
   .version(DEPO_JSON.depo.version)
