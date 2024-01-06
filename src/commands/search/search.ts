@@ -3,8 +3,8 @@
 */
 import { parse as htmlParse } from "node-html-parser";
 import moment from "moment";
-import { cacheHtml } from "../utils/utils.ts";
-import { dealiasSource, DEFAULT_SOURCE } from "../sources/sources.ts";
+import { cacheHtml } from "@/utils/utils.ts";
+import { dealiasSource, DEFAULT_SOURCE } from "@/sources/sources.ts";
 
 // spaces for indentation
 const tab = "  ";

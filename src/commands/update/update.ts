@@ -1,8 +1,9 @@
-import { install } from "./install.ts";
-import { DENO_JSON } from "../meta/deno.json.ts";
+import { install } from "@/commands/install/install.ts";
+import { DENO_JSON } from "@/meta/deno.json.ts";
+import { DEFAULT_SOURCE } from "@/sources/sources.ts";
 
 // update a module in deno.json
-export function update(module: string) {
+export async function update(module: string) {
   let moduleName = module;
   if (module.slice(1).includes("@")) {
     moduleName = module.slice(0, module.slice(1).indexOf("@", 0) + 1);
@@ -17,13 +18,23 @@ export function update(module: string) {
     source = "github";
   } else if ((moduleUrl.startsWith("https://deno.land/x/"))) {
     source = "deno";
-  } else {
+  } else if (
+    moduleUrl.startsWith("https://esm.sh/") || moduleUrl.startsWith("npm:")
+  ) {
     source = "node";
+  } else {
+    source = DEFAULT_SOURCE;
   }
 
   // handle url flags as a string
   const flags = moduleUrl.slice(moduleUrl.indexOf("?") + 1);
 
   // install the module
-  install(source, module, flags);
+  await install(
+    {
+      source: source,
+      pkg: module,
+      flags: flags,
+    },
+  );
 }

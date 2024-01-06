@@ -4,7 +4,7 @@ import {
   isSource,
   sourceEnum,
   sourceListBase,
-} from "../sources/sources.ts";
+} from "@/sources/sources.ts";
 import { printSearchResults } from "./search.ts";
 
 export const searchCommand = new Command()

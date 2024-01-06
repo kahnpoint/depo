@@ -18,11 +18,11 @@ export async function run(
     const output = await new Deno.Command(command, options).output();
     const out = td.decode(output.stdout).trim();
     const err = td.decode(output.stderr).trim();
-    if (options.log){
-    console.log(`%c${out}`, "color: green");
-    console.log(`%c${err}`, "color: red");
+    if (options.log) {
+      console.log(`%c${out}`, "color: green");
+      console.log(`%c${err}`, "color: red");
     }
-    
+
     if (options.error && err) {
       throw new Error(err);
     }

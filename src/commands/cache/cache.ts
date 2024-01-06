@@ -1,14 +1,14 @@
-import { run } from "../utils/run.ts";
-import { DEPO_JSON } from "../meta/depo.json.ts";
+import { run } from "@/utils/run.ts";
+import { DEPO_JSON } from "@/meta/depo.json.ts";
 
 // cache modules
 export function cache() {
   for (const fileToCache of DEPO_JSON.depo.cacheable) {
-    try{
+    try {
       run("deno", { args: ["cache", fileToCache], log: false });
     } catch (e) {
-      null
+      null;
     }
   }
-  console.log("✅ Cached modules");  
+  console.log("✅ Cached modules");
 }

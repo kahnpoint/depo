@@ -1,4 +1,4 @@
-import { DENO_JSON } from "../meta/deno.json.ts";
+import { DENO_JSON } from "@/meta/deno.json.ts";
 
 // remove a module from deno.json
 export function remove(module: string) {

@@ -4,9 +4,9 @@ import {
   DEFAULT_SOURCE,
   isSource,
   sourceEnum,
-} from "../sources/sources.ts";
+} from "@/sources/sources.ts";
 import { install } from "./install.ts";
-import { isDenoStd } from "../meta/deno.std.ts";
+import { isDenoStd } from "@/meta/deno.std.ts";
 
 export const installCommand = new Command()
   .alias("i")
@@ -195,6 +195,11 @@ export const installCommand = new Command()
       } else {
         console.log(`⬇️  ${source}:${module}`);
       }
-      await install(source || DEFAULT_SOURCE, module!, optionsFixed);
+      //await install(source || DEFAULT_SOURCE, module!, optionsFixed);
+      await install({
+        pkg: module || "",
+        source: source || DEFAULT_SOURCE,
+        flags: optionsFixed || {},
+      });
     }
   });
