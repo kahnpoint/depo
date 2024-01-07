@@ -21,7 +21,7 @@ export async function update(module: string) {
   } else if (
     moduleUrl.startsWith("https://esm.sh/") || moduleUrl.startsWith("npm:")
   ) {
-    source = "node";
+    source = "npm";
   } else {
     source = DEFAULT_SOURCE;
   }

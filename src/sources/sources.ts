@@ -6,20 +6,20 @@
 */
 import { EnumType } from "cliffy-command";
 
-export const DEFAULT_SOURCE = "node";
+export const DEFAULT_SOURCE = "npm";
 
 // the strings to use for switch functions
 export const sourceListBase = [
   "deno",
-  "node",
+  "npm",
   "github",
 ];
 
 // shortcuts for the base source names
 export const sourceMapAliases: Record<string, string> = {
   "d": "deno",
-  "npm": "node",
-  "n": "node",
+  "node": "npm",
+  "n": "npm",
   "g": "github",
   "gh": "github",
 };

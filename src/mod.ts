@@ -1,7 +1,7 @@
 import { Command } from "cliffy-command";
-import { DEPO_JSON } from "./meta/depo.json.ts";
-import * as commands from "./commands/mod.ts";
-import { printIntroHeader } from "./commands/init/mod.ts";
+import { DEPO_JSON } from "@/meta/depo.json.ts";
+import * as commands from "@/commands/mod.ts";
+import { printIntroHeader } from "@/commands/init/mod.ts";
 
 // mod command entrypoint
 await new Command()

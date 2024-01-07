@@ -63,13 +63,13 @@ export async function initRepo(options: InitOptions) {
 
   builder.initFile({
     name: "deps.ts",
-    path: "src/deps.ts",
+    path: "deps.ts",
     content: DEP_CONTENT,
   });
   // create deps_dev.ts
   builder.initFile({
     name: "deps_dev.ts",
-    path: "src/deps_dev.ts",
+    path: "deps_dev.ts",
     content: DEP_CONTENT,
   });
 
@@ -197,6 +197,7 @@ class FileFolderBuilder {
 
   initFile(options: InitFileOptions) {
     if (this.options.confirmAll || confirm(`Create ${options.name}?`)) {
+      const initFileType = options.folder ? " folder" : "";
       try {
         if (options.folder) {
           if (existsSync(options.path)) {
@@ -219,15 +220,27 @@ class FileFolderBuilder {
             createNew: !this.options.forceOverwrite,
           });
         }
-        if (!options.quiet) {
+        // if (!options.quiet) {
+        //   console.log(
+        //     `✅ %c${options.name} (${options.path}) created`,
+        //     `color: green`,
+        //   );
+        // }
+        if (options.name === options.path) {
           console.log(
-            `✅ %c${options.name} (${options.path}) created`,
+            `✅ %c${options.name}${initFileType} created`,
+            `color: green`,
+          );
+        } else {
+          console.log(
+            `✅ %c${options.name}${initFileType} (%c${options.path}%c) created`,
+            `color: green`,
+            `color: white`,
             `color: green`,
           );
         }
       } catch (e) {
         if (!options.quiet) {
-          const initFileType = options.folder ? " folder" : "";
           if (options.name === options.path) {
             console.log(
               `⚠️  %c${options.name}${initFileType} already exists`,

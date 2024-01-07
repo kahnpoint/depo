@@ -11,6 +11,11 @@
     "moment": "https://esm.sh/v135/moment@2.30.1",
     "node-html-parser": "https://esm.sh/v135/node-html-parser",
     "deps": "./src/deps.ts",
-    "fs": "https://deno.land/std@0.210.0/fs/mod.ts"
+    "fs": "https://deno.land/std@0.210.0/fs/mod.ts",
+    "@babel/standalone": "https://esm.sh/v135/@babel/standalone@7.23.7",
+    "@babel/parser": "https://esm.sh/v135/@babel/parser@7.23.6",
+    "@babel/traverse": "https://esm.sh/v135/@babel/traverse@7.23.7",
+    "@babel/types": "https://esm.sh/v135/@babel/types@7.23.6",
+    "async": "https://deno.land/std@0.210.0/async/mod.ts"
   }
 }

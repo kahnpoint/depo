@@ -249,7 +249,7 @@ export async function printSearchResults(
       });
       break;
     }
-    case "node": {
+    case "npm": {
       const searchUrl = "https://www.npmjs.com/search?q=";
       const searchResults = await cacheHtml(searchUrl + module);
       const nodeSearchResults = await parseNodeSearch(

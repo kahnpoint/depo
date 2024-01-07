@@ -59,7 +59,7 @@ export async function install(options: InstallOptions) {
   } else {
     options.source = options.source || DEFAULT_SOURCE;
     switch (options.source) {
-      case "node": {
+      case "npm": {
         DENO_JSON["imports"][aliasedPkg] = await getRedirectUrl(
               `https://esm.sh/${DEPO_JSON.esm.version}/${options.pkg}`,
             ) +

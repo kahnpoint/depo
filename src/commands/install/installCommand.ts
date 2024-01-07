@@ -10,6 +10,7 @@ import { isDenoStd } from "@/meta/deno.std.ts";
 
 export const installCommand = new Command()
   .alias("i")
+  .alias("add")
   .type("source", sourceEnum)
   .description("Install module(s) from a source.")
   .arguments("[source:string:source] [modules...:string]")
@@ -191,9 +192,9 @@ export const installCommand = new Command()
     // install each module
     for (const module of args) {
       if (isDenoStd(module || "")) {
-        console.log(`⬇️  deno:${module}`);
+        console.log(`%c⬇️  deno:${module}`, `color: blue`);
       } else {
-        console.log(`⬇️  ${source}:${module}`);
+        console.log(`%c⬇️  ${source}:${module}`, `color: blue`);
       }
       //await install(source || DEFAULT_SOURCE, module!, optionsFixed);
       await install({
