@@ -18,7 +18,7 @@ export const DEFAULT_DEPO_JSON: Record<string, Record<string, any>> = {
       "version": "0.210.0"
     },
     "deps": {
-      "location": "deps.ts"
+      "location": "./deps.ts"
     }
   },
   "esm": {
