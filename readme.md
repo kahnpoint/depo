@@ -1,8 +1,8 @@
 # 🚚 Depo
 
-![depo header](docs/images/depo-header.png)
-
 ### This is a very new project and a work in progress - not yet recommended for use.
+
+![depo header](docs/images/depo-header.png)
 
 Depo is a simple package manager for [Deno](https://deno.land/), mostly wrapping the [esm.sh](https://esm.sh/) package cache. _Not affiliated with Deno or esm.sh_
 
