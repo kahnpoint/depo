@@ -5,6 +5,7 @@ import { cache } from "@/commands/cache/cache.ts";
 // remove module(s) from deno.json
 export const removeCommand = new Command()
   .alias("r")
+  .alias("rm")
   .description("Remove (uninstall) module(s)")
   .arguments("<modules...:string>")
   .action(async (options, ...args) => {

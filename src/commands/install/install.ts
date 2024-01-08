@@ -74,6 +74,7 @@ export async function install(options: InstallOptions) {
         break;
       }
       case "deno": {
+        
         if (aliasedPkg.includes("/")) {
           aliasedPkg = aliasedPkg.slice(0, aliasedPkg.indexOf("/"));
         }
@@ -83,9 +84,8 @@ export async function install(options: InstallOptions) {
           console.log("Not Found: %c[module]", "color: red");
           return;
         }
-        
         DENO_JSON["imports"][aliasedPkg] =
-          `https://deno.land/x/${options.pkg}` + libraryVersion +
+          `https://deno.land` + libraryVersion +
             buildQueryParameters(options.flags) || stringFlags || "";
         break;
       }
