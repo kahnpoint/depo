@@ -77,8 +77,15 @@ export async function install(options: InstallOptions) {
         if (aliasedPkg.includes("/")) {
           aliasedPkg = aliasedPkg.slice(0, aliasedPkg.indexOf("/"));
         }
+        const libraryVersion = await getRedirectUrl(`https://deno.land/x/${options.pkg}`)
+        
+        if (libraryVersion === `https://deno.land/x/${options.pkg}`) {
+          console.log("Not Found: %c[module]", "color: red");
+          return;
+        }
+        
         DENO_JSON["imports"][aliasedPkg] =
-          `https://deno.land/x/${options.pkg}` +
+          `https://deno.land/x/${options.pkg}` + libraryVersion +
             buildQueryParameters(options.flags) || stringFlags || "";
         break;
       }
