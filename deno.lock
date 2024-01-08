@@ -3,6 +3,8 @@
   "redirects": {
     "https://esm.sh/v135/@types/babel__standalone@^7/index.d.ts": "https://esm.sh/v135/@types/babel__standalone@7.1.7/index.d.ts",
     "https://esm.sh/v135/@types/babel__traverse@^7/index.d.ts": "https://esm.sh/v135/@types/babel__traverse@7.20.5/index.d.ts",
+    "https://esm.sh/v135/@types/lodash@4.14.202/index": "https://esm.sh/v135/@types/lodash@4.14.202/index~.d.ts",
+    "https://esm.sh/v135/@types/lodash@^4/index.d.ts": "https://esm.sh/v135/@types/lodash@4.14.202/index.d.ts",
     "https://esm.sh/v135/node-html-parser": "https://esm.sh/v135/node-html-parser@6.1.12"
   },
   "remote": {
@@ -194,6 +196,8 @@
     "https://esm.sh/v135/he@1.2.0/denonext/he.mjs": "1ffb3a2e1892578e01267fda4b32f30dd0b4b3be7393fe239b0ea30cf1d654c7",
     "https://esm.sh/v135/js-tokens@4.0.0/denonext/js-tokens.mjs": "023e64119966814c439af6df3470f26c561a2a4fa04351ddc1f3c0a626cae467",
     "https://esm.sh/v135/jsesc@2.5.2/denonext/jsesc.mjs": "7a5de2d5870ac4a4eb994bed9aa251c8f77626335c7e8246567b5977f0c3676b",
+    "https://esm.sh/v135/lodash@4.17.21": "cf3544d5159a7648b25ad21fcf8dbf08a1fbfb1415b70b4163da646ef83eec4a",
+    "https://esm.sh/v135/lodash@4.17.21/denonext/lodash.mjs": "f04a5db09228738fd8cd06b6d1eaf3463b1b639d1529cf11673c3ac7bda1b1a8",
     "https://esm.sh/v135/moment@2.30.1": "52018c8a05227e5ab87d8ee772250e4c8661e8c781c27170449854dbbb9d5b7f",
     "https://esm.sh/v135/moment@2.30.1/denonext/moment.mjs": "72ca3ed295a9ee29bd5d4e5b39c3c12a48373318ddc3394b853d93b6966d7b09",
     "https://esm.sh/v135/ms@2.1.2/denonext/ms.mjs": "aa4dc45ba72554c5011168f8910cc646c37af53cfff1a15a4decced838b8eb14",

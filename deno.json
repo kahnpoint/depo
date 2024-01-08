@@ -16,6 +16,7 @@
     "@babel/parser": "https://esm.sh/v135/@babel/parser@7.23.6",
     "@babel/traverse": "https://esm.sh/v135/@babel/traverse@7.23.7",
     "@babel/types": "https://esm.sh/v135/@babel/types@7.23.6",
-    "async": "https://deno.land/std@0.210.0/async/mod.ts"
+    "async": "https://deno.land/std@0.210.0/async/mod.ts",
+    "lodash": "https://esm.sh/v135/lodash@4.17.21"
   }
 }
