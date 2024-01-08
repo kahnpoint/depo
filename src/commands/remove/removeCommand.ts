@@ -11,5 +11,5 @@ export const removeCommand = new Command()
     for (const module of args) {
       await remove(module);
     }
-    await cache();
+    //await cache();
   });

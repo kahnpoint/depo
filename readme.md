@@ -14,23 +14,23 @@ esm.sh_
 
 `depo init my-app -y` to get started
 
-Depo will manage creating and caching the deps.ts file for you, so it is
-recommended to import dependencies using their import maps and let Deno handle
+Depo will manage creating and caching the deps.ts file for you, so it is recommended to import dependencies using their import maps and let Deno handle
 the tree-shaking.
 
 ## Commands
 
-- init [name]
+- ```init [name]```
   - Initialize repo with Depo.
-- install, i [source] [modules...]
+- ```install, i [source] <modules...>```
   - Install module(s) from a source.
-- update, u <modules...>
+- ```update, u <modules...>```
   - Upgrade Modules
-- remove, r <modules...> - Remove (uninstall) module(s)
-- cache, c
+- ```remove, r <modules...>``` 
+  - Remove (uninstall) module(s)
+- ```cache, c```
   - Generate and cache deps.ts
   - This is used if you manually add a module to deno.json
-- search, s [source] [library] [count]
+- ```search, s [source] <library> [count]```
   - Search Deno.land, NPM, or Github.
     ![depo search](docs/images/depo-search.png)
 
