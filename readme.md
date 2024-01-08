@@ -1,21 +1,25 @@
 # 🚚 Depo
 
-### This is a new project and a work in progress, not yet recommended for use.
-
 ![depo header](docs/images/depo-header.png)
 
-Depo is a simple package manager for [Deno](https://deno.land/), mostly wrapping
-the [esm.sh](https://esm.sh/) package cache. _Not affiliated with Deno or
-esm.sh_
+### This is a very new project and a work in progress - not yet recommended for use.
+
+Depo is a simple package manager for [Deno](https://deno.land/), mostly wrapping the [esm.sh](https://esm.sh/) package cache. _Not affiliated with Deno or esm.sh_
 
 # Installation
 
+I still need to figure out how ```deno install <remote script>``` works, so for now you can install Depo via:
+```bash
+git clone https://github.com/kahnpoint/depo
+cd depo
+deno task build
+``` 
+
 # Usage
 
-`depo init my-app -y` to get started
+`depo init my-app -y` to initalize a new project
 
-Depo will manage creating and caching the deps.ts file for you, so it is recommended to import dependencies using their import maps and let Deno handle
-the tree-shaking.
+Depo will manage creating and caching the deps.ts file for you, so it is recommended to import dependencies using their import maps and let Deno handle the tree-shaking.
 
 ## Commands
 
@@ -23,6 +27,11 @@ the tree-shaking.
   - Initialize repo with Depo.
 - ```install, i [source] <modules...>```
   - Install module(s) from a source.
+  - Defaults to npm (via esm.sh), but will install deno std modules from deno.land.
+  - Currently supported sources are 
+    - deno, d 
+    - npm, n 
+    - github, gh
 - ```update, u <modules...>```
   - Upgrade Modules
 - ```remove, r <modules...>``` 
@@ -34,17 +43,14 @@ the tree-shaking.
   - Search Deno.land, NPM, or Github.
     ![depo search](docs/images/depo-search.png)
 
-# Future
-
-This is my first project using Deno, so I am planning on adding more features as
-I use it more.
+# Roadmap
+This is my first project using Deno, so I am planning on adding more features as I use it more.
 
 Todo list:
-
 - Tests
 - CI/CD
 - Reduce the number of init confirmation questions
-- Use Deno.openKv() for user settings
+- Use Deno.openKv() to store user settings
 - Automod: a feature to automatically generate a mod.ts file for each folder
-- docs: set up a docs folder for static site generation with
+- Docs: set up a docs folder for static site generation with
   [Lume](https://lume.land/)

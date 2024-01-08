@@ -12,7 +12,6 @@ interface InitOptions {
 }
 
 export async function initRepo(options: InitOptions) {
-  
   // print the depo, esm, and deno versions
   printIntroHeader();
 
@@ -46,14 +45,16 @@ export async function initRepo(options: InitOptions) {
     path: "deno.json",
     content: DENO_JSON,
   });
-  
-  // update std version if depo.json does not exist 
-  if (!existsSync("depo.json")){
-    const stdVersion = (await getRedirectUrl("https://deno.land/std")).split("@")[1] ?? DEFAULT_DEPO_JSON.deno.std.version
-    DEPO_JSON.deno.std.version = stdVersion
+
+  // update std version if depo.json does not exist
+  if (!existsSync("depo.json")) {
+    const stdVersion =
+      (await getRedirectUrl("https://deno.land/std")).split("@")[1] ??
+        DEFAULT_DEPO_JSON.deno.std.version;
+    DEPO_JSON.deno.std.version = stdVersion;
   }
 
-  // create new depo.json if it doesn't exist  
+  // create new depo.json if it doesn't exist
   builder.initFile({
     name: "depo.json",
     path: "depo.json",
@@ -73,7 +74,7 @@ export async function initRepo(options: InitOptions) {
     path: "deps.ts",
     content: DEP_CONTENT,
   });
-  
+
   /*
   // create deps_dev.ts
   builder.initFile({
@@ -141,7 +142,7 @@ Deno.test(function addTest() {
     const DEFAULT_PRECOMMIT_HOOK = `#!/bin/bash
 
 # Run deno fmt on staged files
-files=$(git diff --cached --name-only --diff-filter=ACM "*.ts" "*.js" "*.jsx" "*.tsx" "*.json" "*.jsonc" "*.md" "*.markdown")
+files=$(git diff --cached --name-only --diff-filter=ACM "*.ts" "*.js" "*.jsx" "*.tsx" "*.json" "*.jsonc")
 
 if [[ -n "$files" ]]; then
     echo "Running deno fmt on staged files:"
@@ -186,15 +187,18 @@ fi`;
     path: ".vscode/settings.json",
     content: VSCODE_SETTINGS,
   });
-  
+
   // complete
-  console.log(`%cDone!`, `color: green`); 
+  console.log(`%cDone!`, `color: green`);
   if (options.name) {
-    console.log(`%cRun %c"cd ${options.name}" %cto enter the project folder`, `color: white`, `color: grey`, `color: white`)
+    console.log(
+      `%cRun %c"cd ${options.name}" %cto enter the project folder`,
+      `color: white`,
+      `color: grey`,
+      `color: white`,
+    );
   }
 }
-
-
 
 // Settings for the FileFolderBuilder
 interface InitFileOptions {
@@ -275,5 +279,4 @@ class FileFolderBuilder {
   initFolder(options: InitFileOptions) {
     return this.initFile({ ...options, folder: true });
   }
-  
 }
