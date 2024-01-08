@@ -9,7 +9,6 @@ import { install } from "./install.ts";
 import { isDenoStd } from "@/meta/deno.std.ts";
 import { cache } from "@/commands/cache/cache.ts";
 
-
 export const installCommand = new Command()
   .alias("i")
   .alias("add")
@@ -96,11 +95,11 @@ export const installCommand = new Command()
     */
   .option("--no-bundle", "Don't bundle any dependencies")
   /*
-    -_dev
+    -dev
         use the dev version of the module
         "https://esm.sh/react?dev"
     */
-  .option("-_dev", "Use the dev version of the module")
+  .option("-dev", "Use the dev version of the module")
   /*
     --keep-names
         esbuild - keep original names, even in minified code
@@ -189,7 +188,7 @@ export const installCommand = new Command()
     if (args.length == 0) {
       console.log("Required: %c[modules]", "color: yellow");
       return;
-    }    
+    }
 
     // install each module
     for (const module of args) {
@@ -197,32 +196,29 @@ export const installCommand = new Command()
       if (isDenoStd(module || "")) {
         source = "deno";
       }
-      
-      let moduleColor = "white"
+
+      let moduleColor = "white";
       switch (source) {
         case "deno":
-          moduleColor = "grey"
+          moduleColor = "grey";
           break;
         case "npm":
-          moduleColor = "red"
+          moduleColor = "red";
           break;
         case "github":
-          moduleColor = "green"
+          moduleColor = "green";
           break;
       }
-      
 
       console.log(`%c⬇️  ${source}:${module}`, `color: ${moduleColor}`);
-      
+
       //await install(source || DEFAULT_SOURCE, module!, optionsFixed);
       await install({
         pkg: module || "",
         source: source || DEFAULT_SOURCE,
         flags: optionsFixed || {},
       });
-      
+
       await cache();
-      
-      
     }
   });
