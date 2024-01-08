@@ -3,16 +3,19 @@ import { DEPO_JSON } from "./depo.json.ts";
 // the default deno.json file
 export const DEFAULT_DENO_JSON: Record<string, Record<string, any>> = {
   "tasks": {
-    "mod": "deno run src/mod.ts",
-    "dev": "deno run --watch src/mod.ts",
-    "build": `deno compile --output ${DEPO_JSON.module.name} src/mod.ts`,
+    // run the mod.ts file once 
+    "mod": "deno run -A --unstable src/mod.ts",
+    // watch the mod.ts file and run it on change
+    "dev": "deno cache deps.ts && NODE_ENV='development' deno run -A --unstable --watch src/mod.ts",
+    // compile the mod.ts file to a binary
+    "build": `deno compile -A --output ${DEPO_JSON.module.name} src/mod.ts`,
   },
   "imports": {
     "@/": "./src/",
-    "deps": "./src/deps.ts",
+    "deps": DEPO_JSON.deno.deps.location,
   },
-  "lint": {},
-  "fmt": {},
+  //"lint": {},
+  //"fmt": {},
 };
 
 // DENO_JSON is either the project's deno.json file or the default one

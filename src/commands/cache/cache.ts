@@ -1,14 +1,10 @@
-import { run } from "@/utils/run.ts";
-import { DEPO_JSON } from "@/meta/depo.json.ts";
+import {DEPO_JSON} from "@/meta/depo.json.ts"
+import { buildDeps } from "@/commands/cache/buildDeps.ts"
 
-// cache modules
-export function cache() {
-  for (const fileToCache of DEPO_JSON.depo.cacheable) {
-    try {
-      run("deno", { args: ["cache", fileToCache], log: false });
-    } catch (e) {
-      null;
-    }
-  }
-  console.log("✅ Cached modules");
+export async function cache() {
+  //console.log(`%c⚒️  Building ${DEPO_JSON.deno.deps.location}`, `color: brown`)
+  buildDeps()
+  console.log(`%c💵 Caching ${DEPO_JSON.deno.deps.location}`, `color: green`)
+  await new Deno.Command("deno", { args: ["cache", DEPO_JSON.deno.deps.location] })
+  
 }

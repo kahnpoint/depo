@@ -7,6 +7,8 @@ import {
 } from "@/sources/sources.ts";
 import { install } from "./install.ts";
 import { isDenoStd } from "@/meta/deno.std.ts";
+import { cache } from "@/commands/cache/cache.ts";
+
 
 export const installCommand = new Command()
   .alias("i")
@@ -187,20 +189,40 @@ export const installCommand = new Command()
     if (args.length == 0) {
       console.log("Required: %c[modules]", "color: yellow");
       return;
-    }
+    }    
 
     // install each module
     for (const module of args) {
+      // use deno.land/std if the module is a standard module
       if (isDenoStd(module || "")) {
-        console.log(`%c⬇️  deno:${module}`, `color: blue`);
-      } else {
-        console.log(`%c⬇️  ${source}:${module}`, `color: blue`);
+        source = "deno";
       }
+      
+      let moduleColor = "white"
+      switch (source) {
+        case "deno":
+          moduleColor = "grey"
+          break;
+        case "npm":
+          moduleColor = "red"
+          break;
+        case "github":
+          moduleColor = "green"
+          break;
+      }
+      
+
+      console.log(`%c⬇️  ${source}:${module}`, `color: ${moduleColor}`);
+      
       //await install(source || DEFAULT_SOURCE, module!, optionsFixed);
       await install({
         pkg: module || "",
         source: source || DEFAULT_SOURCE,
         flags: optionsFixed || {},
       });
+      
+      await cache();
+      
+      
     }
   });

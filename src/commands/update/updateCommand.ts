@@ -1,5 +1,6 @@
 import { Command } from "cliffy-command";
 import { update } from "./update.ts";
+import { cache } from "../cache/cache.ts";
 
 // update module(s)
 export const updateCommand = new Command()
@@ -12,4 +13,5 @@ export const updateCommand = new Command()
     for (const module of args) {
       await update(module);
     }
+    await cache();
   });

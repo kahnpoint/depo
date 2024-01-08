@@ -2,6 +2,7 @@ import { DEPO_JSON } from "@/meta/depo.json.ts";
 import { DENO_JSON } from "@/meta/deno.json.ts";
 import { stableDenoStd, unstableDenoStd } from "@/meta/deno.std.ts";
 import { DEFAULT_SOURCE } from "@/sources/sources.ts";
+import { getRedirectUrl } from "@/utils/getRedirectUrl.ts";
 
 interface InstallOptions {
   // the source of the module
@@ -124,11 +125,3 @@ function buildQueryParameters(flags: Record<string, any>) {
   return query.slice(0, -1);
 }
 
-// get the esm.sh redirect url to get the version
-async function getRedirectUrl(url: string): Promise<string> {
-  const response = await fetch(url, { redirect: "manual" });
-  if (response.status === 301 || response.status === 302) {
-    return response.headers.get("location") || "";
-  }
-  return url;
-}

@@ -2,21 +2,16 @@
   "compilerOptions": {},
   "tasks": {
     "mod": "NODE_ENV='development' deno run -A src/mod.ts",
-    "dev": "deno cache src/mod.ts && NODE_ENV='development' deno run -A --watch src/mod.ts",
+    "dev": "deno cache src/mod.ts && NODE_ENV='development' deno run -A --unstable --watch src/mod.ts",
     "build": "deno compile -A --output /usr/local/bin/depo src/mod.ts"
   },
   "imports": {
     "@/": "./src/",
+    "deps": "./src/deps.ts",
     "cliffy-command": "https://deno.land/x/cliffy@v1.0.0-rc.3/command/mod.ts",
     "moment": "https://esm.sh/v135/moment@2.30.1",
     "node-html-parser": "https://esm.sh/v135/node-html-parser",
-    "deps": "./src/deps.ts",
     "fs": "https://deno.land/std@0.210.0/fs/mod.ts",
-    "@babel/standalone": "https://esm.sh/v135/@babel/standalone@7.23.7",
-    "@babel/parser": "https://esm.sh/v135/@babel/parser@7.23.6",
-    "@babel/traverse": "https://esm.sh/v135/@babel/traverse@7.23.7",
-    "@babel/types": "https://esm.sh/v135/@babel/types@7.23.6",
-    "async": "https://deno.land/std@0.210.0/async/mod.ts",
-    "lodash": "https://esm.sh/v135/lodash@4.17.21"
+    "react": "https://esm.sh/v135/react@18.2.0"
   }
 }

@@ -1,10 +1,11 @@
 import { Command } from "cliffy-command";
 import { cache } from "./cache.ts";
+import { buildDeps } from "./buildDeps.ts";
 
-// cache modules
+// cache module(s) from deps.ts
 export const cacheCommand = new Command()
   .alias("c")
-  .description("Cache src/mod.ts, src/deps.ts, and src/deps_dev.ts")
+  .description("Rebuild and cache deps.ts")
   .action(async (options, ...args) => {
-    cache();
+    await cache()
   });

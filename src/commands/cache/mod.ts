@@ -1,3 +1,3 @@
 import { cacheCommand } from "./cacheCommand.ts";
-
-export { cacheCommand };
+import  {cache} from "./cache.ts"
+export { cacheCommand, cache };

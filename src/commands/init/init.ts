@@ -3,6 +3,7 @@ import { DEFAULT_DEPO_JSON, DEPO_JSON } from "@/meta/depo.json.ts";
 import { DEFAULT_DENO_JSON, DENO_JSON } from "@/meta/deno.json.ts";
 import { existsSync } from "fs";
 import { printIntroHeader } from "./printIntroHeader.ts";
+import { getRedirectUrl } from "@/utils/getRedirectUrl.ts";
 
 interface InitOptions {
   name: string;
@@ -45,8 +46,14 @@ export async function initRepo(options: InitOptions) {
     path: "deno.json",
     content: DENO_JSON,
   });
+  
+  // update std version if depo.json does not exist 
+  if (!existsSync("depo.json")){
+    const stdVersion = (await getRedirectUrl("https://deno.land/std")).split("@")[1] ?? DEFAULT_DEPO_JSON.deno.std.version
+    DEPO_JSON.deno.std.version = stdVersion
+  }
 
-  // create new depo.json if it doesn't exist
+  // create new depo.json if it doesn't exist  
   builder.initFile({
     name: "depo.json",
     path: "depo.json",
@@ -66,12 +73,15 @@ export async function initRepo(options: InitOptions) {
     path: "deps.ts",
     content: DEP_CONTENT,
   });
+  
+  /*
   // create deps_dev.ts
   builder.initFile({
     name: "deps_dev.ts",
     path: "deps_dev.ts",
     content: DEP_CONTENT,
   });
+  */
 
   // create mod.ts if it doesn't exist
   const MOD_TS = `export function add(a: number, b: number): number {
@@ -178,7 +188,10 @@ fi`;
   });
   
   // complete
-  console.log(`%cDone!`, `color: green`);
+  console.log(`%cDone!`, `color: green`); 
+  if (options.name) {
+    console.log(`%cRun %c"cd ${options.name}" %cto enter the project folder`, `color: white`, `color: grey`, `color: white`)
+  }
 }
 
 

@@ -1,5 +1,6 @@
 import { Command } from "cliffy-command";
 import { remove } from "./remove.ts";
+import { cache } from "@/commands/cache/cache.ts";
 
 // remove module(s) from deno.json
 export const removeCommand = new Command()
@@ -10,4 +11,5 @@ export const removeCommand = new Command()
     for (const module of args) {
       await remove(module);
     }
+    await cache();
   });
