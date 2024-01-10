@@ -85,7 +85,7 @@ export async function initRepo(options: InitOptions) {
   */
 
   // create mod.ts if it doesn't exist
-  const MOD_TS = `export function add(a: number, b: number): number {
+  const MAIN_TS = `export function add(a: number, b: number): number {
     return a + b;
 }
     
@@ -95,13 +95,13 @@ if (import.meta.main) {
 }`;
   builder.initFile({
     ...options,
-    name: "mod.ts",
-    path: "src/mod.ts",
-    content: MOD_TS,
+    name: "main.ts",
+    path: "src/main.ts",
+    content: MAIN_TS,
   });
 
   // create mod_test.ts if it doesn't exist
-  const MOD_TEST_TS =
+  const MAIN_TEST_TS =
     `import { assertEquals } from "https://deno.land/std@0.210.0/assert/mod.ts";
 import { add } from "./mod.ts";
     
@@ -109,9 +109,9 @@ Deno.test(function addTest() {
     assertEquals(add(2, 3), 5);
 });`;
   builder.initFile({
-    name: "mod_test.ts",
-    path: "src/mod_test.ts",
-    content: MOD_TEST_TS,
+    name: "main_test.ts",
+    path: "src/main_test.ts",
+    content: MAIN_TEST_TS,
   });
 
   // create readme.md if it doesn't exist

@@ -4,11 +4,11 @@ import { DEPO_JSON } from "./depo.json.ts";
 export const DEFAULT_DENO_JSON: Record<string, Record<string, any>> = {
   "tasks": {
     // run the mod.ts file once 
-    "mod": "deno run -A --unstable src/mod.ts",
+    "main": "deno run -A --unstable src/main.ts",
     // watch the mod.ts file and run it on change
-    "dev": "deno cache deps.ts && NODE_ENV='development' deno run -A --unstable --watch src/mod.ts",
+    "dev": "deno cache deps.ts && NODE_ENV='development' deno run -A --unstable --watch src/main.ts",
     // compile the mod.ts file to a binary
-    "build": `deno compile -A --output ${DEPO_JSON.module.name} src/mod.ts`,
+    "build": `deno compile -A --output ${DEPO_JSON.module.name} src/main.ts`,
   },
   "imports": {
     "@/": "./src/",
