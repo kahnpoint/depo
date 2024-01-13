@@ -4,6 +4,8 @@ import { run } from "@/utils/run.ts";
 
 export async function buildDeps(cache=true){
   
+  const allExportNames = new Set<string>()
+  
   // read deps.ts
   let originalDeps 
   try{
@@ -26,6 +28,11 @@ export async function buildDeps(cache=true){
     if (includeImportStarts.some((start) => value.startsWith(start))){
       const charsToReplace = ["/", "@", "#", "?", "&", "=", ":", ".", "-"]
       let importName = key
+      
+      if (importName.endsWith("/")){
+        continue
+      }
+      
       for (const char of charsToReplace){  
         importName = importName.replaceAll(char, "_")
       }
@@ -34,8 +41,13 @@ export async function buildDeps(cache=true){
       }
       
       outputTextList.push(`import * as ${importName} from '${key}'`)
+      allExportNames.add(importName)
     }
   }
+  
+  outputTextList.push("")
+  
+  outputTextList.push(`export {${Array.from(allExportNames).join(", ")}};`)
    
   Deno.writeTextFileSync("deps.ts", outputTextList.join("\n"))
   
