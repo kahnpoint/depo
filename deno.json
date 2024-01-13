@@ -3,7 +3,8 @@
   "tasks": {
     "main": "NODE_ENV='development' deno run -A src/main.ts",
     "dev": "deno cache src/main.ts && NODE_ENV='development' deno run -A --unstable --watch src/main.ts",
-    "build": "deno compile -A --output /usr/local/bin/depo src/main.ts"
+    "build": "deno compile -A --output /usr/local/bin/depo src/main.ts",
+    "sudo-build": "sudo \"$(which deno)\" task build"
   },
   "imports": {
     "@/": "./src/",
